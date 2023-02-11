@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @RequiredArgsConstructor
 @Component
 public class DefaultProductLoader implements CommandLineRunner {
@@ -17,12 +19,16 @@ public class DefaultProductLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        loadProductData();
+    }
+
+    private void loadProductData() {
         for(int i = 0; i < 100; i++) {
             productRepository.save(
                     ProductEntity.builder()
                             .title("test")
-                            .code("code")
                             .type(ProductTypeEnum.PET_SUPPLIES)
+                            .price(BigDecimal.ONE)
                             .build()
             );
         }

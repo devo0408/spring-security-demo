@@ -41,7 +41,4 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    // todo: implement create/update methods
-    // todo: implement productInventory
-
 }

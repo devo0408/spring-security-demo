@@ -1,6 +1,7 @@
 package com.devo.product.domain;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Builder;
@@ -34,8 +35,10 @@ public class ProductEntity extends BaseEntity {
 
     private String title;
 
+    @Column(nullable = false)
     private ProductTypeEnum type;
 
+    @Column(nullable = false)
     private BigDecimal price;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
