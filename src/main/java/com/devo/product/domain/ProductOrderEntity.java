@@ -32,7 +32,7 @@ public class ProductOrderEntity extends BaseEntity {
 //    @ManyToOne
 //    private Customer customer;
 
-    @OneToMany(mappedBy = "beerOrder", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productOrderEntity", cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<ProductOrderLineEntity> productOrderLines;
 

@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Component
@@ -26,6 +27,7 @@ public class DefaultProductLoader implements CommandLineRunner {
         for(int i = 0; i < 100; i++) {
             productRepository.save(
                     ProductEntity.builder()
+                            .externalUuid(UUID.randomUUID())
                             .title("test")
                             .type(ProductTypeEnum.PET_SUPPLIES)
                             .price(BigDecimal.ONE)
