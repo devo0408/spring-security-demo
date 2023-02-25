@@ -17,9 +17,8 @@ import java.util.UUID;
 @MappedSuperclass
 public class BaseEntity {
 
-    public BaseEntity(UUID id, UUID externalUuid, Long version, Timestamp createdDate, Timestamp lastModifiedDate) {
+    public BaseEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate) {
         this.id = id;
-        this.externalUuid = externalUuid;
         this.version = version;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
@@ -33,9 +32,6 @@ public class BaseEntity {
     )
     @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
     private UUID id;
-
-    @Column(length = 36, columnDefinition = "varchar", nullable = false)
-    private UUID externalUuid;
 
     @Version
     private Long version;

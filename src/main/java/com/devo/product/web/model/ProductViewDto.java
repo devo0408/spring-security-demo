@@ -17,10 +17,10 @@ import java.util.UUID;
 public class ProductViewDto extends BaseViewDto {
 
     @Builder
-    public ProductViewDto(UUID externalUuid, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
+    public ProductViewDto(UUID id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
                           String title, ProductTypeEnum productType, BigDecimal price, Integer quantityOnHand) {
 
-        super(externalUuid, version, createdDate, lastModifiedDate);
+        super(id, version, createdDate, lastModifiedDate);
         this.title = title;
         this.type = productType;
         this.price = price;

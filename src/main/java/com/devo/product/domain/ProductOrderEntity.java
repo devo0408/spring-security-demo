@@ -22,8 +22,8 @@ import java.util.UUID;
 public class ProductOrderEntity extends BaseEntity {
 
     @Builder
-    public ProductOrderEntity(UUID id, UUID externalUuid, Long version, Timestamp createdDate, Timestamp lastModifiedDate, Set<ProductOrderLineEntity> productOrderLines, OrderStatusEnum orderStatus) {
-        super(id, externalUuid, version, createdDate, lastModifiedDate);
+    public ProductOrderEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, Set<ProductOrderLineEntity> productOrderLines, OrderStatusEnum orderStatus) {
+        super(id, version, createdDate, lastModifiedDate);
         this.productOrderLines = productOrderLines;
         this.orderStatus = orderStatus;
     }

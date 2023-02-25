@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static io.micrometer.common.util.StringUtils.isBlank;
@@ -17,8 +16,6 @@ import static org.springframework.data.jpa.domain.Specification.where;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, UUID>, JpaSpecificationExecutor<ProductEntity> {
-
-    Optional<ProductEntity> findByExternalUuid(UUID externalUuid);
 
     default Page<ProductEntity> searchAllOptionalParameters(String title, ProductTypeEnum productTypeEnum, Pageable pageable) {
         return findAll(

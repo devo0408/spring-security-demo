@@ -37,7 +37,7 @@ public class ProductController {
     public ResponseEntity<ProductViewDto> getProductById(@PathVariable("productUuid") UUID productUuid){
         log.debug("Get Request for ProductId: " + productUuid);
 
-        val product = productService.findProductByExternalUuidRequired(productUuid);
+        val product = productService.findProductById(productUuid);
         return ResponseEntity.ok(product);
     }
 

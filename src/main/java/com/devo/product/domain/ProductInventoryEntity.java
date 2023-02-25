@@ -17,8 +17,8 @@ import java.util.UUID;
 public class ProductInventoryEntity extends BaseEntity {
 
     @Builder
-    public ProductInventoryEntity(UUID id, UUID externalUuid, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductEntity productEntity, Integer quantityOnHand) {
-        super(id, externalUuid, version, createdDate, lastModifiedDate);
+    public ProductInventoryEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductEntity productEntity, Integer quantityOnHand) {
+        super(id, version, createdDate, lastModifiedDate);
         this.product = productEntity;
         this.quantityOnHand = quantityOnHand;
     }

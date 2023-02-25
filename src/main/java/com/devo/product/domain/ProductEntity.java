@@ -24,9 +24,9 @@ import java.util.UUID;
 public class ProductEntity extends BaseEntity {
 
     @Builder
-    public ProductEntity(UUID id, UUID externalUuid, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
+    public ProductEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
                          String title, ProductTypeEnum type, BigDecimal price, Set<ProductInventoryEntity> productInventoryEntity) {
-        super(id, externalUuid, version, createdDate, lastModifiedDate);
+        super(id, version, createdDate, lastModifiedDate);
         this.title = title;
         this.type = type;
         this.price = price;

@@ -16,8 +16,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class BaseViewDto {
 
-    @JsonProperty("externalUuid")
-    private UUID externalUuid = null;
+    @JsonProperty("id")
+    private UUID id = null;
 
     @JsonProperty("version")
     private Integer version = null;

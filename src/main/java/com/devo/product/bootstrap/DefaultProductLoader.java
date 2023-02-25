@@ -27,7 +27,6 @@ public class DefaultProductLoader implements CommandLineRunner {
         for(int i = 0; i < 100; i++) {
             productRepository.save(
                     ProductEntity.builder()
-                            .externalUuid(UUID.randomUUID())
                             .title("test")
                             .type(ProductTypeEnum.PET_SUPPLIES)
                             .price(BigDecimal.ONE)

@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductViewDto findProductByExternalUuidRequired(UUID externalUuid) {
-        return productRepository.findByExternalUuid(externalUuid)
+    public ProductViewDto findProductById(UUID id) {
+        return productRepository.findById(id)
                 .map(productMapper::productToProductDto)
                 .orElseThrow(ProductNotFoundException::new);
     }

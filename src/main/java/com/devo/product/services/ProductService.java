@@ -11,6 +11,6 @@ public interface ProductService {
 
     Page<ProductViewDto> findAllOptionalParameters(Pageable pageable, String productTitle, ProductTypeEnum productTypeEnum);
 
-    ProductViewDto findProductByExternalUuidRequired(UUID uuid);
+    ProductViewDto findProductById(UUID id);
 
 }
