@@ -21,20 +21,20 @@ import java.util.UUID;
 @Entity
 public class ProductOrderEntity extends BaseEntity {
 
-    @Builder
-    public ProductOrderEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, Set<ProductOrderLineEntity> productOrderLines, OrderStatusEnum orderStatus) {
-        super(id, version, createdDate, lastModifiedDate);
-        this.productOrderLines = productOrderLines;
-        this.orderStatus = orderStatus;
-    }
-
-    // todo: implement Customers part
-//    @ManyToOne
-//    private Customer customer;
+    @ManyToOne
+    private CustomerEntity customer;
 
     @OneToMany(mappedBy = "productOrderEntity", cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<ProductOrderLineEntity> productOrderLines;
 
     private OrderStatusEnum orderStatus = OrderStatusEnum.NEW;
+
+
+    @Builder
+    public ProductOrderEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, Set<ProductOrderLineEntity> productOrderLines, OrderStatusEnum orderStatus) {
+        super(id, version, createdDate, lastModifiedDate);
+        this.productOrderLines = productOrderLines;
+        this.orderStatus = orderStatus;
+    }
 }

@@ -16,15 +16,6 @@ import java.util.UUID;
 @Entity
 public class ProductOrderLineEntity extends BaseEntity {
 
-    @Builder
-    public ProductOrderLineEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductOrderEntity productOrderEntity, ProductEntity productEntity, Integer quantityAllocated) {
-        super(id, version, createdDate, lastModifiedDate);
-        this.productOrderEntity = productOrderEntity;
-        this.productEntity = productEntity;
-        this.quantityAllocated = quantityAllocated;
-    }
-
-
     @ManyToOne
     private ProductOrderEntity productOrderEntity;
 
@@ -32,5 +23,13 @@ public class ProductOrderLineEntity extends BaseEntity {
     private ProductEntity productEntity;
 
     private Integer quantityAllocated = 0;
+
+    @Builder
+    public ProductOrderLineEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductOrderEntity productOrderEntity, ProductEntity productEntity, Integer quantityAllocated) {
+        super(id, version, createdDate, lastModifiedDate);
+        this.productOrderEntity = productOrderEntity;
+        this.productEntity = productEntity;
+        this.quantityAllocated = quantityAllocated;
+    }
 
 }
