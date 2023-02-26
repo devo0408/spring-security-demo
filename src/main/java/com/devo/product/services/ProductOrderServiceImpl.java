@@ -9,6 +9,7 @@ import com.devo.product.repositories.CustomerRepository;
 import com.devo.product.repositories.ProductOrderRepository;
 import com.devo.product.web.mappers.ProductOrderMapper;
 import com.devo.product.web.model.ProductOrderDto;
+import com.devo.product.web.model.write.ProductOrderCreateDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -57,21 +58,18 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     }
 
     @Override
-    public ProductOrderDto placeOrder(UUID customerId, ProductOrderDto beerOrderDto) {
+    public ProductOrderDto placeOrder(UUID customerId, ProductOrderCreateDto ProductOrderCreateDto) {
         val customer = findCustomerRequired(customerId);
 
-        // todo: @Denys implement CreateProductOrderDto (exclude: OrderStatus and BaseViewDto fields)
-        // todo: @Denys implement ProductOrderLineDto (exclude: BaseViewDto fields)
-
-        return Optional.of(beerOrderDto)
+        return Optional.of(ProductOrderCreateDto)
                 .map(productOrderMapper::dtoToEntity)
-                .map(ProductOrderEntity::resetId)
-                .map(orderEntity -> orderEntity.withStatus(NEW))
+                 .map(orderEntity -> orderEntity.withStatus(NEW))
                 .map(orderEntity -> orderEntity.withCustomer(customer))
                 .map(this::populateOrderToOrderLines)
                 .map(productOrderRepository::saveAndFlush)
                 .map(productOrderMapper::entityToDto)
                 .orElseThrow(ProductOrderCreationException::new);
+
     }
 
     @Override

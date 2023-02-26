@@ -2,6 +2,7 @@ package com.devo.product.web.controllers;
 
 import com.devo.product.services.ProductOrderService;
 import com.devo.product.web.model.ProductOrderDto;
+import com.devo.product.web.model.write.ProductOrderCreateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -48,12 +49,12 @@ public class ProductOrderController {
     @PutMapping(produces = { "application/json" })
     public ResponseEntity<ProductOrderDto> placeOrder(
             @RequestParam(value = "customerId") UUID customerId,
-            @RequestBody ProductOrderDto placeOrderDto
+            @RequestBody ProductOrderCreateDto productOrderCreateDto
     ) {
-        log.debug("Placing order {} for customers orders for customer {}", placeOrderDto, customerId);
+        log.debug("Placing order {} for customers orders for customer {}", productOrderCreateDto, customerId);
 
         return ResponseEntity.ok(
-                productOrderService.placeOrder(customerId, placeOrderDto)
+                productOrderService.placeOrder(customerId, productOrderCreateDto)
         );
     }
 

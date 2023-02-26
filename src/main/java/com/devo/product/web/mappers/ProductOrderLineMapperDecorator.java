@@ -4,11 +4,10 @@ import com.devo.product.domain.ProductOrderLineEntity;
 import com.devo.product.exception.ProductNotFoundException;
 import com.devo.product.repositories.ProductRepository;
 import com.devo.product.web.model.ProductOrderLineDto;
+import com.devo.product.web.model.write.ProductOrderLineCreateDto;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
-import java.util.Optional;
 
 
 public abstract class ProductOrderLineMapperDecorator implements ProductOrderLineMapper {
@@ -36,16 +35,14 @@ public abstract class ProductOrderLineMapperDecorator implements ProductOrderLin
     }
 
     @Override
-    public ProductOrderLineEntity dtoToEntity(ProductOrderLineDto dto) {
-        val product = Optional.of(dto)
-                .map(ProductOrderLineDto::getProductId)
-                .map(productRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+    public ProductOrderLineEntity dtoToEntity(ProductOrderLineCreateDto dto) {
+        val product = productRepository.findById(dto.getProductId())
                 .orElseThrow(ProductNotFoundException::new);
 
-        ProductOrderLineEntity orderLineEntity = productOrderLineMapper.dtoToEntity(dto);
-        orderLineEntity.setProductEntity(product);
-        return orderLineEntity;
+        return ProductOrderLineEntity.builder()
+                .productEntity(product)
+                .quantityAllocated(dto.getOrderQuantity())
+                .build();
     }
+
 }
