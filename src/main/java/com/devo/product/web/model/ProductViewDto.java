@@ -16,6 +16,16 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 public class ProductViewDto extends BaseViewDto {
 
+    private String title;
+
+    private ProductTypeEnum type;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING)
+    private BigDecimal price;
+
+    private Integer quantityOnHand = 0;
+
+
     @Builder
     public ProductViewDto(UUID id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
                           String title, ProductTypeEnum productType, BigDecimal price, Integer quantityOnHand) {
@@ -26,14 +36,4 @@ public class ProductViewDto extends BaseViewDto {
         this.price = price;
         this.quantityOnHand = quantityOnHand;
     }
-
-    private String title;
-
-    private ProductTypeEnum type;
-
-    @JsonFormat(shape= JsonFormat.Shape.STRING)
-    private BigDecimal price;
-
-    private Integer quantityOnHand = 0;
-
 }

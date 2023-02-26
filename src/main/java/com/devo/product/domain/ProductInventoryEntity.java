@@ -16,16 +16,16 @@ import java.util.UUID;
 @Entity
 public class ProductInventoryEntity extends BaseEntity {
 
+    @ManyToOne
+    private ProductEntity product;
+
+    private Integer quantityOnHand = 0;
+
     @Builder
     public ProductInventoryEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductEntity productEntity, Integer quantityOnHand) {
         super(id, version, createdDate, lastModifiedDate);
         this.product = productEntity;
         this.quantityOnHand = quantityOnHand;
     }
-
-    @ManyToOne
-    private ProductEntity product;
-
-    private Integer quantityOnHand = 0;
 
 }
