@@ -52,7 +52,21 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     public ProductOrderDto placeOrder(UUID customerId, ProductOrderDto beerOrderDto) {
         val customer = findCustomerRequired(customerId);
 
+        // todo: @Denys implement CreateProductOrderDto (exclude: OrderStatus and BaseViewDto fields)
+        // todo: @Denys implement CreateProductOrderDto (exclude: OrderStatus and BaseViewDto fields)
 
+//        BeerOrder beerOrder = beerOrderMapper.dtoToBeerOrder(beerOrderDto);
+//        beerOrder.setId(null); //should not be set by outside client
+//        beerOrder.setCustomer(customerOptional.get());
+//        beerOrder.setOrderStatus(OrderStatusEnum.NEW);
+//
+//        beerOrder.getBeerOrderLines().forEach(line -> line.setBeerOrder(beerOrder));
+//
+//        BeerOrder savedBeerOrder = beerOrderRepository.saveAndFlush(beerOrder);
+//
+//        log.debug("Saved Beer Order: " + beerOrder.getId());
+//
+//        return beerOrderMapper.beerOrderToDto(savedBeerOrder);
 
         return null;
     }
