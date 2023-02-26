@@ -37,4 +37,19 @@ public class ProductOrderEntity extends BaseEntity {
         this.productOrderLines = productOrderLines;
         this.orderStatus = orderStatus;
     }
+
+    public ProductOrderEntity resetId() {
+        setId(null);
+        return this;
+    }
+
+    public ProductOrderEntity withStatus(OrderStatusEnum orderStatus) {
+        this.orderStatus = orderStatus;
+        return this;
+    }
+
+    public ProductOrderEntity withCustomer(CustomerEntity customer) {
+        this.customer = customer;
+        return this;
+    }
 }

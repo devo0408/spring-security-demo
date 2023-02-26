@@ -14,6 +14,6 @@ public interface ProductOrderService {
 
     ProductOrderDto getOrderById(UUID customerId, UUID orderId);
 
-    void pickupOrder(UUID customerId, UUID orderId);
+    ProductOrderDto pickupOrder(UUID customerId, UUID orderId);
 
 }

@@ -44,5 +44,4 @@ public class ProductEntity extends BaseEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<ProductInventoryEntity> productInventoryEntity = new HashSet<>();
-
 }

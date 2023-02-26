@@ -1,7 +1,10 @@
 package com.devo.product.services;
 
 import com.devo.product.domain.CustomerEntity;
+import com.devo.product.domain.ProductOrderEntity;
 import com.devo.product.exception.CustomerNotFoundException;
+import com.devo.product.exception.ProductOrderCreationException;
+import com.devo.product.exception.ProductOrderNotFoundException;
 import com.devo.product.repositories.CustomerRepository;
 import com.devo.product.repositories.ProductOrderRepository;
 import com.devo.product.web.mappers.ProductOrderMapper;
@@ -15,16 +18,21 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
+
 import static java.util.stream.Collectors.toList;
+import static com.devo.product.domain.OrderStatusEnum.NEW;
+import static com.devo.product.domain.OrderStatusEnum.READY;
+import static com.devo.product.domain.OrderStatusEnum.PICKED_UP;
 
 @Slf4j
 @Service
 @AllArgsConstructor
 public class ProductOrderServiceImpl implements ProductOrderService {
 
-    private final ProductOrderRepository productOrderRepository;
     private final CustomerRepository customerRepository;
+    private final ProductOrderRepository productOrderRepository;
     private final ProductOrderMapper productOrderMapper;
 
     @Override
@@ -53,36 +61,49 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         val customer = findCustomerRequired(customerId);
 
         // todo: @Denys implement CreateProductOrderDto (exclude: OrderStatus and BaseViewDto fields)
-        // todo: @Denys implement CreateProductOrderDto (exclude: OrderStatus and BaseViewDto fields)
+        // todo: @Denys implement ProductOrderLineDto (exclude: BaseViewDto fields)
 
-//        BeerOrder beerOrder = beerOrderMapper.dtoToBeerOrder(beerOrderDto);
-//        beerOrder.setId(null); //should not be set by outside client
-//        beerOrder.setCustomer(customerOptional.get());
-//        beerOrder.setOrderStatus(OrderStatusEnum.NEW);
-//
-//        beerOrder.getBeerOrderLines().forEach(line -> line.setBeerOrder(beerOrder));
-//
-//        BeerOrder savedBeerOrder = beerOrderRepository.saveAndFlush(beerOrder);
-//
-//        log.debug("Saved Beer Order: " + beerOrder.getId());
-//
-//        return beerOrderMapper.beerOrderToDto(savedBeerOrder);
-
-        return null;
+        return Optional.of(beerOrderDto)
+                .map(productOrderMapper::dtoToEntity)
+                .map(ProductOrderEntity::resetId)
+                .map(orderEntity -> orderEntity.withStatus(NEW))
+                .map(orderEntity -> orderEntity.withCustomer(customer))
+                .map(this::populateOrderToOrderLines)
+                .map(productOrderRepository::saveAndFlush)
+                .map(productOrderMapper::entityToDto)
+                .orElseThrow(ProductOrderCreationException::new);
     }
 
     @Override
     public ProductOrderDto getOrderById(UUID customerId, UUID orderId) {
-        return null;
+        val customer = findCustomerRequired(customerId);
+
+        return productOrderRepository.findByIdAndCustomer(orderId, customer)
+                .map(productOrderMapper::entityToDto)
+                .orElseThrow(ProductOrderNotFoundException::new);
     }
 
     @Override
-    public void pickupOrder(UUID customerId, UUID orderId) {
+    public ProductOrderDto pickupOrder(UUID customerId, UUID orderId) {
+        val customer = findCustomerRequired(customerId);
 
+        return productOrderRepository.findByIdAndCustomer(orderId, customer)
+                .filter(order -> READY.equals(order.getOrderStatus()))
+                .map(order -> order.withStatus(PICKED_UP))
+                .map(productOrderRepository::saveAndFlush)
+                .map(productOrderMapper::entityToDto)
+                .orElseThrow(ProductOrderNotFoundException::new);
     }
 
     private CustomerEntity findCustomerRequired(UUID customerId) {
         return customerRepository.findById(customerId)
                 .orElseThrow(CustomerNotFoundException::new);
+    }
+
+    private ProductOrderEntity populateOrderToOrderLines(ProductOrderEntity productOrderEntity) {
+        productOrderEntity.getProductOrderLines().forEach(line ->
+                line.setProductOrderEntity(productOrderEntity)
+        );
+        return productOrderEntity;
     }
 }
