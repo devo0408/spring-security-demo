@@ -32,10 +32,11 @@ public class ProductOrderEntity extends BaseEntity {
 
 
     @Builder
-    public ProductOrderEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, Set<ProductOrderLineEntity> productOrderLines, OrderStatusEnum orderStatus) {
+    public ProductOrderEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, Set<ProductOrderLineEntity> productOrderLines, OrderStatusEnum orderStatus, CustomerEntity customer) {
         super(id, version, createdDate, lastModifiedDate);
         this.productOrderLines = productOrderLines;
         this.orderStatus = orderStatus;
+        this.customer = customer;
     }
 
     public ProductOrderEntity resetId() {

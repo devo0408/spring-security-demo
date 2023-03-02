@@ -37,12 +37,12 @@ public abstract class ProductOrderLineMapperDecorator implements ProductOrderLin
     @Override
     public ProductOrderLineEntity dtoToEntity(ProductOrderLineCreateDto dto) {
         val product = productRepository.findById(dto.getProductId())
-                .orElseThrow(ProductNotFoundException::new);
+            .orElseThrow(ProductNotFoundException::new);
 
         return ProductOrderLineEntity.builder()
-                .productEntity(product)
-                .quantityAllocated(dto.getOrderQuantity())
-                .build();
+            .productEntity(product)
+            .quantityAllocated(dto.getOrderQuantity())
+            .build();
     }
 
 }

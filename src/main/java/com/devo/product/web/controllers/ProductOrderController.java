@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/order/")
+@RequestMapping("/api/v1/order")
 @RestController
 public class ProductOrderController {
 

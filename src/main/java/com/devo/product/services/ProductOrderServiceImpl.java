@@ -1,11 +1,13 @@
 package com.devo.product.services;
 
 import com.devo.product.domain.CustomerEntity;
+import com.devo.product.domain.ProductInventoryEntity;
 import com.devo.product.domain.ProductOrderEntity;
 import com.devo.product.exception.CustomerNotFoundException;
 import com.devo.product.exception.ProductOrderCreationException;
 import com.devo.product.exception.ProductOrderNotFoundException;
 import com.devo.product.repositories.CustomerRepository;
+import com.devo.product.repositories.ProductInventoryRepository;
 import com.devo.product.repositories.ProductOrderRepository;
 import com.devo.product.web.mappers.ProductOrderMapper;
 import com.devo.product.web.model.ProductOrderDto;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -34,6 +37,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 
     private final CustomerRepository customerRepository;
     private final ProductOrderRepository productOrderRepository;
+    private final ProductInventoryRepository productInventoryRepository;
     private final ProductOrderMapper productOrderMapper;
 
     @Override
@@ -43,17 +47,17 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         val customersOrderPage = productOrderRepository.findAllByCustomer(customer, pageable);
 
         val resultList = customersOrderPage
-                .stream()
-                .map(productOrderMapper::entityToDto)
-                .collect(toList());
+            .stream()
+            .map(productOrderMapper::entityToDto)
+            .collect(toList());
 
         return new PageImpl<>(
-                resultList,
-                PageRequest.of(
-                        customersOrderPage.getPageable().getPageNumber(),
-                        customersOrderPage.getPageable().getPageSize()
-                ),
-                customersOrderPage.getTotalElements()
+            resultList,
+            PageRequest.of(
+                customersOrderPage.getPageable().getPageNumber(),
+                customersOrderPage.getPageable().getPageSize()
+            ),
+           customersOrderPage.getTotalElements()
         );
     }
 
@@ -62,13 +66,13 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         val customer = findCustomerRequired(customerId);
 
         return Optional.of(ProductOrderCreateDto)
-                .map(productOrderMapper::dtoToEntity)
-                 .map(orderEntity -> orderEntity.withStatus(NEW))
-                .map(orderEntity -> orderEntity.withCustomer(customer))
-                .map(this::populateOrderToOrderLines)
-                .map(productOrderRepository::saveAndFlush)
-                .map(productOrderMapper::entityToDto)
-                .orElseThrow(ProductOrderCreationException::new);
+            .map(productOrderMapper::dtoToEntity)
+            .map(orderEntity -> orderEntity.withStatus(NEW))
+            .map(orderEntity -> orderEntity.withCustomer(customer))
+            .map(this::populateOrderToOrderLines)
+            .map(productOrderRepository::saveAndFlush)
+            .map(productOrderMapper::entityToDto)
+            .orElseThrow(ProductOrderCreationException::new);
 
     }
 
@@ -77,30 +81,43 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         val customer = findCustomerRequired(customerId);
 
         return productOrderRepository.findByIdAndCustomer(orderId, customer)
-                .map(productOrderMapper::entityToDto)
-                .orElseThrow(ProductOrderNotFoundException::new);
+            .map(productOrderMapper::entityToDto)
+            .orElseThrow(ProductOrderNotFoundException::new);
     }
 
     @Override
+    @Transactional
     public ProductOrderDto pickupOrder(UUID customerId, UUID orderId) {
         val customer = findCustomerRequired(customerId);
 
+        val order = productOrderRepository.findByIdAndCustomer(orderId, customer)
+            .orElseThrow(ProductOrderNotFoundException::new);
+
+        order.getProductOrderLines().forEach(orderLine ->
+            val newProductInventory = ProductInventoryEntity.builder()
+                .productEntity(orderLine.get)
+
+                productInventoryRepository.save(
+                        new
+                );
+        );
+
         return productOrderRepository.findByIdAndCustomer(orderId, customer)
-                .filter(order -> READY.equals(order.getOrderStatus()))
-                .map(order -> order.withStatus(PICKED_UP))
-                .map(productOrderRepository::saveAndFlush)
-                .map(productOrderMapper::entityToDto)
-                .orElseThrow(ProductOrderNotFoundException::new);
+            .filter(order -> READY.equals(order.getOrderStatus()))
+            .map(order -> order.withStatus(PICKED_UP))
+            .map(productOrderRepository::saveAndFlush)
+            .map(productOrderMapper::entityToDto)
+            .orElseThrow(ProductOrderNotFoundException::new);
     }
 
     private CustomerEntity findCustomerRequired(UUID customerId) {
         return customerRepository.findById(customerId)
-                .orElseThrow(CustomerNotFoundException::new);
+            .orElseThrow(CustomerNotFoundException::new);
     }
 
     private ProductOrderEntity populateOrderToOrderLines(ProductOrderEntity productOrderEntity) {
         productOrderEntity.getProductOrderLines().forEach(line ->
-                line.setProductOrderEntity(productOrderEntity)
+            line.setProductOrderEntity(productOrderEntity)
         );
         return productOrderEntity;
     }
