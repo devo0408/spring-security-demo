@@ -91,23 +91,22 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         val customer = findCustomerRequired(customerId);
 
         val order = productOrderRepository.findByIdAndCustomer(orderId, customer)
+            .filter(o -> READY.equals(o.getOrderStatus()))
             .orElseThrow(ProductOrderNotFoundException::new);
 
-        order.getProductOrderLines().forEach(orderLine ->
-            val newProductInventory = ProductInventoryEntity.builder()
-                .productEntity(orderLine.get)
+        order.getProductOrderLines().forEach(orderLine -> {
+            val productInventory = ProductInventoryEntity.builder()
+                .productEntity(orderLine.getProductEntity())
+                .productEntity(orderLine.getProductEntity())
+                .build();
+            productInventoryRepository.save(productInventory);
+        });
 
-                productInventoryRepository.save(
-                        new
-                );
-        );
-
-        return productOrderRepository.findByIdAndCustomer(orderId, customer)
-            .filter(order -> READY.equals(order.getOrderStatus()))
-            .map(order -> order.withStatus(PICKED_UP))
+        return Optional.of(order)
+            .map(o -> o.withStatus(PICKED_UP))
             .map(productOrderRepository::saveAndFlush)
             .map(productOrderMapper::entityToDto)
-            .orElseThrow(ProductOrderNotFoundException::new);
+            .orElseThrow();
     }
 
     private CustomerEntity findCustomerRequired(UUID customerId) {
