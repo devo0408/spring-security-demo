@@ -24,7 +24,7 @@ public class ProductOrderEntity extends BaseEntity {
     @ManyToOne
     private CustomerEntity customer;
 
-    @OneToMany(mappedBy = "productOrderEntity", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<ProductOrderLineEntity> productOrderLines;
 

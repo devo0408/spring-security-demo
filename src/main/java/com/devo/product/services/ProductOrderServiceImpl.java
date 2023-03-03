@@ -2,7 +2,6 @@ package com.devo.product.services;
 
 import com.devo.product.domain.CustomerEntity;
 import com.devo.product.domain.ProductInventoryEntity;
-import com.devo.product.domain.ProductOrderEntity;
 import com.devo.product.exception.CustomerNotFoundException;
 import com.devo.product.exception.ProductOrderCreationException;
 import com.devo.product.exception.ProductOrderNotFoundException;
@@ -69,7 +68,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
             .map(productOrderMapper::dtoToEntity)
             .map(orderEntity -> orderEntity.withStatus(NEW))
             .map(orderEntity -> orderEntity.withCustomer(customer))
-            .map(this::populateOrderToOrderLines)
+            //.map(this::populateOrderToOrderLines)
             .map(productOrderRepository::saveAndFlush)
             .map(productOrderMapper::entityToDto)
             .orElseThrow(ProductOrderCreationException::new);
@@ -114,10 +113,4 @@ public class ProductOrderServiceImpl implements ProductOrderService {
             .orElseThrow(CustomerNotFoundException::new);
     }
 
-    private ProductOrderEntity populateOrderToOrderLines(ProductOrderEntity productOrderEntity) {
-        productOrderEntity.getProductOrderLines().forEach(line ->
-            line.setProductOrderEntity(productOrderEntity)
-        );
-        return productOrderEntity;
-    }
 }
