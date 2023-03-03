@@ -58,7 +58,7 @@ public class ProductOrderController {
         );
     }
 
-    @PatchMapping(produces = { "application/json"}, path = {"{orderId}"} )
+    @PatchMapping(produces = { "application/json"}, path = {"{orderId}/pickup"} )
     public ResponseEntity<ProductOrderDto> pickupOrder(
             @PathVariable("orderId") UUID orderId,
             @RequestParam(value = "customerId") UUID customerId
