@@ -14,6 +14,7 @@ import java.util.UUID;
 public class ProductOrderLineDto extends BaseViewDto {
 
     private UUID productId;
+
     private Integer orderQuantity = 0;
 
     @Builder

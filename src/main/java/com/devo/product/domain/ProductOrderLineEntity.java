@@ -17,17 +17,13 @@ import java.util.UUID;
 public class ProductOrderLineEntity extends BaseEntity {
 
     @ManyToOne
-    private ProductOrderEntity productOrderEntity;
-
-    @ManyToOne
     private ProductEntity productEntity;
 
     private Integer quantityAllocated = 0;
 
     @Builder
-    public ProductOrderLineEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductOrderEntity productOrderEntity, ProductEntity productEntity, Integer quantityAllocated) {
+    public ProductOrderLineEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductEntity productEntity, Integer quantityAllocated) {
         super(id, version, createdDate, lastModifiedDate);
-        this.productOrderEntity = productOrderEntity;
         this.productEntity = productEntity;
         this.quantityAllocated = quantityAllocated;
     }

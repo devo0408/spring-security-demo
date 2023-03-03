@@ -17,18 +17,18 @@ import java.util.UUID;
 @Entity
 public class CustomerEntity extends BaseEntity {
 
-    @Builder
-    public CustomerEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerName,
-                    UUID apiKey, Set<ProductOrderEntity> orders) {
-        super(id, version, createdDate, lastModifiedDate);
-        this.customerName = customerName;
-        this.orders = orders;
-    }
-
-
     private String customerName;
 
     @OneToMany(mappedBy = "customer")
     private Set<ProductOrderEntity> orders;
+
+
+    @Builder
+    public CustomerEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerName,
+                          UUID apiKey, Set<ProductOrderEntity> orders) {
+        super(id, version, createdDate, lastModifiedDate);
+        this.customerName = customerName;
+        this.orders = orders;
+    }
 
 }

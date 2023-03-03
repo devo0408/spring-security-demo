@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-@Deprecated
-public interface ProductInventoryRepository  extends JpaRepository<ProductInventoryEntity, UUID> {
+public interface ProductInventoryRepository extends JpaRepository<ProductInventoryEntity, UUID> {
 
     List<ProductInventoryEntity> findAllByProduct(ProductEntity productEntity);
 

@@ -16,7 +16,9 @@ import java.util.UUID;
 public class ProductOrderDto extends BaseViewDto {
 
     private UUID customerId;
+
     private List<ProductOrderLineDto> productOrderLines;
+
     private OrderStatusEnum orderStatus;
 
     @Builder

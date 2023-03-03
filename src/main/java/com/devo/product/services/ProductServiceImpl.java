@@ -24,14 +24,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<ProductViewDto> findAllOptionalParameters(@NonNull Pageable pageable, String productTitle, ProductTypeEnum productTypeEnum) {
         return productRepository.searchAllOptionalParameters(productTitle, productTypeEnum, pageable)
-                .map(productMapper::productToProductDto);
+            .map(productMapper::productToProductDto);
     }
 
     @Override
     public ProductViewDto findProductById(UUID id) {
         return productRepository.findById(id)
-                .map(productMapper::productToProductDto)
-                .orElseThrow(ProductNotFoundException::new);
+            .map(productMapper::productToProductDto)
+            .orElseThrow(ProductNotFoundException::new);
     }
 
 }

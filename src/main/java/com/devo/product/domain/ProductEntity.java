@@ -23,16 +23,6 @@ import java.util.UUID;
 @Entity
 public class ProductEntity extends BaseEntity {
 
-    @Builder
-    public ProductEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
-                         String title, ProductTypeEnum type, BigDecimal price, Set<ProductInventoryEntity> productInventoryEntity) {
-        super(id, version, createdDate, lastModifiedDate);
-        this.title = title;
-        this.type = type;
-        this.price = price;
-        this.productInventoryEntity = productInventoryEntity;
-    }
-
     private String title;
 
     @Column(nullable = false)
@@ -45,4 +35,14 @@ public class ProductEntity extends BaseEntity {
     @Fetch(FetchMode.JOIN)
     private Set<ProductInventoryEntity> productInventoryEntity = new HashSet<>();
 
+
+    @Builder
+    public ProductEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
+                         String title, ProductTypeEnum type, BigDecimal price, Set<ProductInventoryEntity> productInventoryEntity) {
+        super(id, version, createdDate, lastModifiedDate);
+        this.title = title;
+        this.type = type;
+        this.price = price;
+        this.productInventoryEntity = productInventoryEntity;
+    }
 }

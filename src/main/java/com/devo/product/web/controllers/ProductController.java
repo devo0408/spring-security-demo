@@ -5,7 +5,6 @@ import com.devo.product.services.ProductService;
 import com.devo.product.web.model.ProductViewDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -16,7 +15,7 @@ import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/product/")
+@RequestMapping("/api/v1/product")
 @RestController
 public class ProductController {
 
@@ -24,21 +23,25 @@ public class ProductController {
 
 
     @GetMapping(produces = { "application/json" })
-    public ResponseEntity<Page<ProductViewDto>> listProducts(@PageableDefault Pageable pageable,
-                                                             @RequestParam(value = "name", required = false) String name,
-                                                             @RequestParam(value = "productTypeEnum", required = false) ProductTypeEnum productTypeEnum) {
+    public ResponseEntity<Page<ProductViewDto>> listProducts(
+            @PageableDefault Pageable pageable,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "productTypeEnum", required = false) ProductTypeEnum productTypeEnum
+    ) {
         log.debug("Listing products");
 
-        val products = productService.findAllOptionalParameters(pageable, name, productTypeEnum);
-        return ResponseEntity.ok(products);
+        return ResponseEntity.ok(
+            productService.findAllOptionalParameters(pageable, name, productTypeEnum)
+        );
     }
 
     @GetMapping(path = {"{productUuid}"}, produces = { "application/json" })
     public ResponseEntity<ProductViewDto> getProductById(@PathVariable("productUuid") UUID productUuid){
         log.debug("Get Request for ProductId: " + productUuid);
 
-        val product = productService.findProductById(productUuid);
-        return ResponseEntity.ok(product);
+        return ResponseEntity.ok(
+            productService.findProductById(productUuid)
+        );
     }
 
 }

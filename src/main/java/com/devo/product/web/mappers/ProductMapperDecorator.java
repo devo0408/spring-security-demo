@@ -26,9 +26,9 @@ public abstract class ProductMapperDecorator implements ProductMapper {
 
         if(!isEmpty(productEntity.getProductInventoryEntity())) {
             val inventory = productEntity.getProductInventoryEntity()
-                    .stream()
-                    .map(ProductInventoryEntity::getQuantityOnHand)
-                    .reduce(0, Integer::sum);
+                .stream()
+                .map(ProductInventoryEntity::getQuantityOnHand)
+                .reduce(0, Integer::sum);
             dto.setQuantityOnHand(inventory);
         }
 
