@@ -24,7 +24,6 @@ public class ProductOrderLineEntity extends BaseEntity {
     @Builder
     public ProductOrderLineEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductEntity productEntity, Integer quantityAllocated) {
         super(id, version, createdDate, lastModifiedDate);
-        //this.productOrderEntity = productOrderEntity;
         this.productEntity = productEntity;
         this.quantityAllocated = quantityAllocated;
     }

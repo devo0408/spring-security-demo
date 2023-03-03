@@ -64,11 +64,11 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     public ProductOrderDto placeOrder(UUID customerId, ProductOrderCreateDto ProductOrderCreateDto) {
         val customer = findCustomerRequired(customerId);
 
+        // todo: populating customerId to ProductOrderDto
         return Optional.of(ProductOrderCreateDto)
             .map(productOrderMapper::dtoToEntity)
             .map(orderEntity -> orderEntity.withStatus(NEW))
             .map(orderEntity -> orderEntity.withCustomer(customer))
-            //.map(this::populateOrderToOrderLines)
             .map(productOrderRepository::saveAndFlush)
             .map(productOrderMapper::entityToDto)
             .orElseThrow(ProductOrderCreationException::new);

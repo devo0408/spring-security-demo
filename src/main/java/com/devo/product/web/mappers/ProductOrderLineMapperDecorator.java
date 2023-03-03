@@ -31,6 +31,7 @@ public abstract class ProductOrderLineMapperDecorator implements ProductOrderLin
     public ProductOrderLineDto entityToDto(ProductOrderLineEntity entity) {
         ProductOrderLineDto orderLineDto = productOrderLineMapper.entityToDto(entity);
         orderLineDto.setProductId(entity.getProductEntity().getId());
+        orderLineDto.setOrderQuantity(entity.getQuantityAllocated());
         return orderLineDto;
     }
 
