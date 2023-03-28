@@ -65,5 +65,4 @@ public class CustomerControllerTest {
 
     assertEquals(input, customerUuids);
   }
-
 }
