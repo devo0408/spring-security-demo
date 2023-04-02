@@ -10,8 +10,8 @@ public class CustomerControllerTestTestIT extends BaseTestIT {
 
     @Test
     void listCustomers_ok() throws Exception {
-        mockMvc.perform(get("/api/v1/customer"))
-                //.with(httpBasic("devo", "supersecreto")))
+        mockMvc.perform(get("/api/v1/customer")
+                .with(httpBasic("devo", "supersecreto")))
                 .andExpect(status().isOk());
     }
 
