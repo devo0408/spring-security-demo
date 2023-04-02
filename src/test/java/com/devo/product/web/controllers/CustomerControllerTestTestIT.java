@@ -9,9 +9,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class CustomerControllerTestTestIT extends BaseTestIT {
 
     @Test
-    void listCustomers_ok() throws Exception {
+    void listCustomers_admin_ok() throws Exception {
         mockMvc.perform(get("/api/v1/customer")
-                .with(httpBasic("devo", "supersecreto")))
+                .with(httpBasic("admin", "admin")))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void listCustomers_user_ok() throws Exception {
+        mockMvc.perform(get("/api/v1/customer")
+                        .with(httpBasic("user", "user")))
                 .andExpect(status().isOk());
     }
 
