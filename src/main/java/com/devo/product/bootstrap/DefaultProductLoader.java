@@ -54,6 +54,7 @@ public class DefaultProductLoader implements CommandLineRunner {
         productRepository.findAll().forEach(productEntity ->
             productInventoryRepository.save(
                 ProductInventoryEntity.builder()
+                        // add some comment
                     .productEntity(productEntity)
                     .quantityOnHand(new Random().nextInt(10))
                     .build()
