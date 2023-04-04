@@ -16,3 +16,5 @@ commit by idea
 Interesting... looks like it goes with my account. Probably the way to delete git. preperties was correct 
 
 when I do coomit and push, it wants to use another account 
+
+test push
