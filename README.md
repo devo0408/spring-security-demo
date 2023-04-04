@@ -6,3 +6,5 @@ Components:
 - Spring boot
 - H2
 - Java CI with Gradle
+
+some test changes 
