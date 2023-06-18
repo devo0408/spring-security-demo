@@ -7,17 +7,9 @@ import java.util.Date;
 
 @Data
 public class ErrorResponse {
-
-    @NotNull
     private Date timestamp;
-
-    @NotNull
     private int status;
-
     private String error;
-
     private String message;
-
     private String path;
-
 }

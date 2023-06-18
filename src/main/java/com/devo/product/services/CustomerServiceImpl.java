@@ -16,14 +16,10 @@ public class CustomerServiceImpl implements CustomerService {
 
   private final CustomerRepository customerRepository;
 
-
   @Override
-  public List<String> getAllCustomerIds() {
-    return customerRepository.findAll()
-        .stream()
+  public List<Long> getAllCustomerIds() {
+    return customerRepository.findAll().stream()
         .map(CustomerEntity::getId)
-        .map(UUID::toString)
         .collect(toList());
   }
-
 }

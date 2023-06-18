@@ -64,7 +64,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     public ProductOrderDto placeOrder(UUID customerId, ProductOrderCreateDto ProductOrderCreateDto) {
         val customer = findCustomerRequired(customerId);
 
-        // todo: populating customerId to ProductOrderDto
+        // todo: @Denys - populate customerId to ProductOrderDto
         return Optional.of(ProductOrderCreateDto)
             .map(productOrderMapper::dtoToEntity)
             .map(orderEntity -> orderEntity.withStatus(NEW))
@@ -112,5 +112,4 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         return customerRepository.findById(customerId)
             .orElseThrow(CustomerNotFoundException::new);
     }
-
 }

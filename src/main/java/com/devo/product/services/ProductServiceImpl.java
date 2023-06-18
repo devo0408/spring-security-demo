@@ -20,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-
     @Override
     public Page<ProductViewDto> findAllOptionalParameters(@NonNull Pageable pageable, String productTitle, ProductTypeEnum productTypeEnum) {
         return productRepository.searchAllOptionalParameters(productTitle, productTypeEnum, pageable)
@@ -33,5 +32,4 @@ public class ProductServiceImpl implements ProductService {
             .map(productMapper::productToProductDto)
             .orElseThrow(ProductNotFoundException::new);
     }
-
 }

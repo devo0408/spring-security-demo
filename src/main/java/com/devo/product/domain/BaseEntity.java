@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Setter
 @Getter
@@ -18,13 +16,8 @@ import java.util.UUID;
 public class BaseEntity {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Version
     private Long version;
@@ -36,8 +29,7 @@ public class BaseEntity {
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 
-
-    public BaseEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate) {
+    public BaseEntity(Long id, Long version, Timestamp createdDate, Timestamp lastModifiedDate) {
         this.id = id;
         this.version = version;
         this.createdDate = createdDate;

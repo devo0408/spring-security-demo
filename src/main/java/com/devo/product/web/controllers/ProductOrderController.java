@@ -21,7 +21,6 @@ public class ProductOrderController {
 
     private final ProductOrderService productOrderService;
 
-
     @GetMapping(produces = { "application/json" })
     public ResponseEntity<Page<ProductOrderDto>> listOrders(
             @PageableDefault Pageable pageable,
@@ -69,5 +68,4 @@ public class ProductOrderController {
                 productOrderService.pickupOrder(customerId, orderId)
         );
     }
-
 }

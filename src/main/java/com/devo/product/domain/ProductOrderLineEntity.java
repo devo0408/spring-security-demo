@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -22,7 +21,7 @@ public class ProductOrderLineEntity extends BaseEntity {
     private Integer quantityAllocated = 0;
 
     @Builder
-    public ProductOrderLineEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductEntity productEntity, Integer quantityAllocated) {
+    public ProductOrderLineEntity(Long id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductEntity productEntity, Integer quantityAllocated) {
         super(id, version, createdDate, lastModifiedDate);
         this.productEntity = productEntity;
         this.quantityAllocated = quantityAllocated;

@@ -28,6 +28,8 @@ dependencies {
 
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 
+    implementation 'mysql:mysql-connector-java:8.0.32'
+
     runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
