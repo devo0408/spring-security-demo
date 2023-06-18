@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
   private final CustomerRepository customerRepository;
 
   @Override
-  public List<Integer> getAllCustomerIds() {
+  public List<Long> getAllCustomerIds() {
     return customerRepository.findAll().stream()
         .map(CustomerEntity::getId)
         .collect(toList());

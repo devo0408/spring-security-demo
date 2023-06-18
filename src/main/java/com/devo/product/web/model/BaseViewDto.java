@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,7 +16,7 @@ import java.util.UUID;
 public class BaseViewDto {
 
     @JsonProperty("id")
-    private Integer id = null;
+    private Long id = null;
 
     @JsonProperty("version")
     private Integer version = null;

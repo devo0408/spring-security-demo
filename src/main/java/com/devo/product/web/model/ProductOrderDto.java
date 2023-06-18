@@ -22,7 +22,7 @@ public class ProductOrderDto extends BaseViewDto {
     private OrderStatusEnum orderStatus;
 
     @Builder
-    public ProductOrderDto(Integer id,
+    public ProductOrderDto(Long id,
                            Integer version,
                            OffsetDateTime createdDate,
                            OffsetDateTime lastModifiedDate,

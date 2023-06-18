@@ -18,14 +18,12 @@ public class CustomerController {
 
   private final CustomerService customerService;
 
-
   @GetMapping(produces = {"application/json" })
-  public ResponseEntity<List<Integer>> listProducts() {
+  public ResponseEntity<List<Long>> listProducts() {
     log.debug("Listing customers");
 
     return ResponseEntity.ok(
         customerService.getAllCustomerIds()
     );
   }
-
 }

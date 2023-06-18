@@ -21,7 +21,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-
     @GetMapping(produces = { "application/json" })
     public ResponseEntity<Page<ProductViewDto>> listProducts(
             @PageableDefault Pageable pageable,
@@ -43,5 +42,4 @@ public class ProductController {
             productService.findProductById(productUuid)
         );
     }
-
 }

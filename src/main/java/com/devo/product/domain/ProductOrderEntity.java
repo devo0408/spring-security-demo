@@ -29,9 +29,16 @@ public class ProductOrderEntity extends BaseEntity {
 
     private OrderStatusEnum orderStatus = OrderStatusEnum.NEW;
 
-
     @Builder
-    public ProductOrderEntity(Integer id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, Set<ProductOrderLineEntity> productOrderLines, OrderStatusEnum orderStatus, CustomerEntity customer) {
+    public ProductOrderEntity(
+            Long id,
+            Long version,
+            Timestamp createdDate,
+            Timestamp lastModifiedDate,
+            Set<ProductOrderLineEntity> productOrderLines,
+            OrderStatusEnum orderStatus,
+            CustomerEntity customer
+    ) {
         super(id, version, createdDate, lastModifiedDate);
         this.productOrderLines = productOrderLines;
         this.orderStatus = orderStatus;

@@ -9,7 +9,6 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -22,10 +21,15 @@ public class CustomerEntity extends BaseEntity {
     @OneToMany(mappedBy = "customer")
     private Set<ProductOrderEntity> orders;
 
-
     @Builder
-    public CustomerEntity(Integer id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerName,
-                          Set<ProductOrderEntity> orders) {
+    public CustomerEntity(
+            Long id,
+            Long version,
+            Timestamp createdDate,
+            Timestamp lastModifiedDate,
+            String customerName,
+            Set<ProductOrderEntity> orders
+    ) {
         super(id, version, createdDate, lastModifiedDate);
         this.customerName = customerName;
         this.orders = orders;

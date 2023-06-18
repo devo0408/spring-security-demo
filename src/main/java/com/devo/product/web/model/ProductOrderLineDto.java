@@ -13,16 +13,16 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 public class ProductOrderLineDto extends BaseViewDto {
 
-    private Integer productId;
+    private Long productId;
 
     private Integer orderQuantity = 0;
 
     @Builder
-    public ProductOrderLineDto(Integer id,
+    public ProductOrderLineDto(Long id,
                                Integer version,
                                OffsetDateTime createdDate,
                                OffsetDateTime lastModifiedDate,
-                               Integer productId,
+                               Long productId,
                                Integer orderQuantity
     ) {
         super(id, version, createdDate, lastModifiedDate);

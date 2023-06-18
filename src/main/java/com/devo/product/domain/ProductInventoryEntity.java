@@ -21,7 +21,14 @@ public class ProductInventoryEntity extends BaseEntity {
     private Integer quantityOnHand = 0;
 
     @Builder
-    public ProductInventoryEntity(Integer id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, ProductEntity productEntity, Integer quantityOnHand) {
+    public ProductInventoryEntity(
+            Long id,
+            Long version,
+            Timestamp createdDate,
+            Timestamp lastModifiedDate,
+            ProductEntity productEntity,
+            Integer quantityOnHand
+    ) {
         super(id, version, createdDate, lastModifiedDate);
         this.product = productEntity;
         this.quantityOnHand = quantityOnHand;
