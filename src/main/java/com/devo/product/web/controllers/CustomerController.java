@@ -20,7 +20,7 @@ public class CustomerController {
 
 
   @GetMapping(produces = {"application/json" })
-  public ResponseEntity<List<String>> listProducts() {
+  public ResponseEntity<List<Integer>> listProducts() {
     log.debug("Listing customers");
 
     return ResponseEntity.ok(

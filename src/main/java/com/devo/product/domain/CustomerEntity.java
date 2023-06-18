@@ -24,8 +24,8 @@ public class CustomerEntity extends BaseEntity {
 
 
     @Builder
-    public CustomerEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerName,
-                          UUID apiKey, Set<ProductOrderEntity> orders) {
+    public CustomerEntity(Integer id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerName,
+                          Set<ProductOrderEntity> orders) {
         super(id, version, createdDate, lastModifiedDate);
         this.customerName = customerName;
         this.orders = orders;

@@ -13,5 +13,4 @@ public interface ProductOrderLineMapper {
     ProductOrderLineDto entityToDto(ProductOrderLineEntity entity);
 
     ProductOrderLineEntity dtoToEntity(ProductOrderLineCreateDto dto);
-
 }

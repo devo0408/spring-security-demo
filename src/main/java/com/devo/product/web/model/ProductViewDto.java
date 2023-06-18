@@ -27,7 +27,7 @@ public class ProductViewDto extends BaseViewDto {
 
 
     @Builder
-    public ProductViewDto(UUID id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
+    public ProductViewDto(Integer id, Integer version, OffsetDateTime createdDate, OffsetDateTime lastModifiedDate,
                           String title, ProductTypeEnum productType, BigDecimal price, Integer quantityOnHand) {
 
         super(id, version, createdDate, lastModifiedDate);

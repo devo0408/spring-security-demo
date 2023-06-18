@@ -10,5 +10,4 @@ import java.util.List;
 public class ProductOrderCreateDto {
 
     private List<ProductOrderLineCreateDto> productOrderLines;
-
 }

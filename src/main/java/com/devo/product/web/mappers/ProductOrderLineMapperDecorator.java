@@ -45,5 +45,4 @@ public abstract class ProductOrderLineMapperDecorator implements ProductOrderLin
             .quantityAllocated(dto.getOrderQuantity())
             .build();
     }
-
 }

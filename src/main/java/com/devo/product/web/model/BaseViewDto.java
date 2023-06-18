@@ -17,7 +17,7 @@ import java.util.UUID;
 public class BaseViewDto {
 
     @JsonProperty("id")
-    private UUID id = null;
+    private Integer id = null;
 
     @JsonProperty("version")
     private Integer version = null;
@@ -29,5 +29,4 @@ public class BaseViewDto {
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
     @JsonProperty("lastModifiedDate")
     private OffsetDateTime lastModifiedDate = null;
-
 }

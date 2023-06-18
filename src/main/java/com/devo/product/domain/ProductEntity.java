@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -37,7 +36,7 @@ public class ProductEntity extends BaseEntity {
 
 
     @Builder
-    public ProductEntity(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
+    public ProductEntity(Integer id, Long version, Timestamp createdDate, Timestamp lastModifiedDate,
                          String title, ProductTypeEnum type, BigDecimal price, Set<ProductInventoryEntity> productInventoryEntity) {
         super(id, version, createdDate, lastModifiedDate);
         this.title = title;

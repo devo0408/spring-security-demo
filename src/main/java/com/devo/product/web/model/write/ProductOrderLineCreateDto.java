@@ -8,9 +8,6 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class ProductOrderLineCreateDto {
-
     private UUID productId;
-
     private Integer orderQuantity = 0;
-
 }

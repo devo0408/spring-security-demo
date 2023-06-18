@@ -31,10 +31,10 @@ public class DefaultProductLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        loadUsersData();
-        loadProductData();
-        loadProductInventoryData();
-        loadOrderData();
+        //loadUsersData();
+        //loadProductData();
+        //loadProductInventoryData();
+        //loadOrderData();
     }
 
     private void loadProductData() {

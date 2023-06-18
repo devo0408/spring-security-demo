@@ -13,21 +13,20 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 public class ProductOrderLineDto extends BaseViewDto {
 
-    private UUID productId;
+    private Integer productId;
 
     private Integer orderQuantity = 0;
 
     @Builder
-    public ProductOrderLineDto(UUID id,
+    public ProductOrderLineDto(Integer id,
                                Integer version,
                                OffsetDateTime createdDate,
                                OffsetDateTime lastModifiedDate,
-                               UUID productId,
+                               Integer productId,
                                Integer orderQuantity
     ) {
         super(id, version, createdDate, lastModifiedDate);
         this.productId = productId;
         this.orderQuantity = orderQuantity;
     }
-
 }

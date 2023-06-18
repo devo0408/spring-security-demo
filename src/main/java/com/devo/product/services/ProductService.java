@@ -8,9 +8,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.UUID;
 
 public interface ProductService {
-
     Page<ProductViewDto> findAllOptionalParameters(Pageable pageable, String productTitle, ProductTypeEnum productTypeEnum);
-
     ProductViewDto findProductById(UUID id);
-
 }
